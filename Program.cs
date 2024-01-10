@@ -7,7 +7,10 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+        builder.Services.AddAuthentication();
         builder.Services.AddAuthorization();
+        
+        builder.Services.AddHealthChecks();
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
@@ -21,30 +24,16 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+        else
+        {
+            app.UseHsts();
+            app.UseHttpsRedirection();
+        }
 
-        app.UseHttpsRedirection();
-
+        app.UseAuthentication();
         app.UseAuthorization();
 
-        var summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        app.MapGet("/weatherforecast", (HttpContext httpContext) =>
-            {
-                var forecast = Enumerable.Range(1, 5).Select(index =>
-                        new WeatherForecast
-                        {
-                            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                            TemperatureC = Random.Shared.Next(-20, 55),
-                            Summary = summaries[Random.Shared.Next(summaries.Length)]
-                        })
-                    .ToArray();
-                return forecast;
-            })
-            .WithName("GetWeatherForecast")
-            .WithOpenApi();
+        app.MapHealthChecks("/healthz");
 
         app.Run();
     }
