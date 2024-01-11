@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeatSentry", "SeatSentry.csproj", "{B2155C7B-1B50-446E-A400-31A85AEFC711}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App.csproj", "{B2155C7B-1B50-446E-A400-31A85AEFC711}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +12,9 @@ Global
 		{B2155C7B-1B50-446E-A400-31A85AEFC711}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2155C7B-1B50-446E-A400-31A85AEFC711}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2155C7B-1B50-446E-A400-31A85AEFC711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2ABE7E0-7444-4D5B-90D2-E0D7AFD3E6F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2ABE7E0-7444-4D5B-90D2-E0D7AFD3E6F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2ABE7E0-7444-4D5B-90D2-E0D7AFD3E6F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2ABE7E0-7444-4D5B-90D2-E0D7AFD3E6F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
