@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using SeatSentry.Controllers;
+using SeatSentry.Data;
+
 namespace SeatSentry;
 
 public class Program
@@ -16,6 +20,11 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        {
+            options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresDev"));
+        });
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -30,6 +39,9 @@ public class Program
 
         app.MapHealthChecks("/healthz");
 
+        var v1 = app.MapGroup("api/v1");
+        v1.MapGroup("/notifications").MapCourseNotifications();
+        
         app.Run();
     }
 }
