@@ -22,7 +22,28 @@
     <ItemGroup>
       <Folder Include="Migrations\" />
       <Folder Include="Services\" />
-      <Folder Include="Tests\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Test\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="Test\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="Test\obj\Test.csproj.nuget.dgspec.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Test\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Test\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Test\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Test\**" />
     </ItemGroup>
 
 </Project>
