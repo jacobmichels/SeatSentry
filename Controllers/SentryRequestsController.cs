@@ -1,38 +1,44 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using SeatSentry.Data;
+using SeatSentry.DTOs.SentryRequest;
+using SeatSentry.Models;
 using SeatSentry.Services;
 
 namespace SeatSentry.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class SentryRequestsController(SentryRequestService service) : ControllerBase
+public class SentryRequestsController(ISentryRequestsService service) : ControllerBase
 {
-    private readonly SentryRequestService _service = service;
-
     [HttpGet]
-    public Ok<string> FindAll()
+    public Ok<IEnumerable<SentryRequest>> FindAll()
     {
-        // TODO: implement this using the service
-        return TypedResults.Ok("Hello World");
+        return TypedResults.Ok(service.FindAll());
     }
     
     [HttpGet("{id:guid}")]
-    public Ok<string> FindById(Guid id)
+    public Ok<SentryRequest> FindById(Guid id)
     {
-        return TypedResults.Ok("Hello World");
+        return TypedResults.Ok(service.FindById(id));
     }
     
     [HttpPost]
-    public Created<string> Create()
+    public Created<SentryRequest> Create([FromBody]NewSentryRequest newSentryRequest)
     {
-        return TypedResults.Created("/notifications/1", "Hello World");
+        var created = service.Create(newSentryRequest);
+        return TypedResults.Created($@"/notifications/{created.Id}", created);
     }
     
     [HttpPut("{id:guid}")]
-    public Ok<string> Update(Guid id)
+    public Ok<SentryRequest> Update(Guid id, [FromBody]NewSentryRequest newSentryRequest)
     {
-        return TypedResults.Ok("Hello World");
+        return TypedResults.Ok(service.Update(id, newSentryRequest));
+    }
+    
+    [HttpDelete("{id:guid}")]
+    public NoContent Delete(Guid id)
+    {
+        service.Delete(id);
+        return TypedResults.NoContent();
     }
 }
